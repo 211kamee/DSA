@@ -12,6 +12,7 @@ void bubbleSort(int *arr, int size)
                 arr[j + 1] = t;
             }
 };
+
 void insertionSort(int *arr, int size)
 {
     // Take one and insert it at the right spot
@@ -26,6 +27,7 @@ void insertionSort(int *arr, int size)
         arr[j + 1] = key;
     }
 };
+
 void selectionSort(int *arr, int size)
 {
     // Select the smallest and put it in place
