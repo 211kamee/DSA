@@ -9,3 +9,6 @@
 # IDE files
 .vscode/
 *.code-workspace
+
+# Generated files
+tempCodeRunnerFile.*
