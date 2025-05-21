@@ -1,0 +1,11 @@
+# Build / Built files
+*.exe
+*.out
+*.a
+*.obj
+*.so
+*.o
+
+# IDE files
+.vscode/
+*.code-workspace
