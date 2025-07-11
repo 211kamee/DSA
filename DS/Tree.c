@@ -54,20 +54,69 @@ void Postorder(TreeNode *root)
 	printf("%i ", root->data);
 }
 
+void BFS(TreeNode *root)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+
+	int data[10];
+	size_t dataCount = 0;
+
+	TreeNode *treeLevel[10];
+	size_t treeLevelCount = 0;
+	treeLevel[treeLevelCount++] = root;
+
+	data[dataCount++] = treeLevel[0]->data;
+
+	while (treeLevelCount != 0)
+	{
+		size_t newLevelCount = 0;
+		TreeNode *newLevel[treeLevelCount * 2];
+
+		for (size_t i = 0; i < treeLevelCount; i++)
+		{
+			if (treeLevel[i]->left != NULL)
+			{
+				newLevel[newLevelCount++] = treeLevel[i]->left;
+			}
+			if (treeLevel[i]->right != NULL)
+			{
+				newLevel[newLevelCount++] = treeLevel[i]->right;
+			}
+		}
+
+		for (size_t i = 0; i < newLevelCount; i++)
+		{
+			data[dataCount++] = newLevel[i]->data;
+		}
+
+		treeLevelCount = 0;
+		for (size_t i = 0; i < newLevelCount; i++)
+		{
+			treeLevel[treeLevelCount++] = newLevel[i];
+		}
+	}
+
+	for (size_t i = 0; i < dataCount; i++)
+	{
+		printf("%i ", data[i]);
+	}
+}
+
 int main()
 {
 	TreeNode *myRootNode = createTreeNode(1);
 	myRootNode->left = createTreeNode(2);
+	myRootNode->right = createTreeNode(3);
 
 	myRootNode->left->left = createTreeNode(4);
 	myRootNode->left->right = createTreeNode(5);
-
-	myRootNode->left->right->left = createTreeNode(6);
-
-	myRootNode->right = createTreeNode(3);
 	myRootNode->right->left = createTreeNode(7);
 	myRootNode->right->right = createTreeNode(8);
 
+	myRootNode->left->right->left = createTreeNode(6);
 	myRootNode->right->right->left = createTreeNode(9);
 	myRootNode->right->right->right = createTreeNode(10);
 
@@ -76,6 +125,8 @@ int main()
 	Preorder(myRootNode);
 	printf("\n");
 	Postorder(myRootNode);
+	printf("\n");
+	BFS(myRootNode);
 	printf("\n");
 
 	return 0;
